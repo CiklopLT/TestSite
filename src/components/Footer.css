@@ -1,0 +1,30 @@
+.footer {
+    display: flex;
+    height: 129px;
+    background-color: #4619AC;
+}
+
+.footer-container {
+
+}
+
+.footer ul{
+    display: grid;
+    grid-row-gap: 0;
+    grid-column-gap: 2rem;
+    grid-auto-flow: column;
+}
+
+.footer ul > li{
+    text-decoration: none;
+    list-style-image: url('/public/e4.png');
+}
+
+.footer ul > li:first-child{
+    list-style: none;
+}
+
+.footer ul > li > a{
+    color: white;
+    padding-left: 10px;
+}
