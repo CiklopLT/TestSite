@@ -1,18 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Header from './Header'
 import Footer from './Footer'
 
 import './Layout.css';
+import { gql, useQuery } from "@apollo/client";
+
+const PAGES = gql`
+    query Query {
+        pages{
+            title,
+            subPages
+        }
+    }
+`;
 
 const Layout = ({ children }) => {
+  const { loading, data } = useQuery(PAGES);
   return (
     <div className="layout">
-      <Header />
+      <Header menuLoading={loading} menuData={data} />
       <main className="main">
         {children}
       </main>
-      <Footer />
+      <Footer menuLoading={loading} menuData={data} />
     </div>
   );
 };

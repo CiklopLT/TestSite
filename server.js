@@ -52,7 +52,7 @@ const resolvers = {
   },
   Mutation: {
     submitForm: async (_, { firstName, lastName, message }) => {
-      console.log(firstName, lastName, message)
+      console.log(`Receive inquery: ${firstName} ${lastName} ${message}`);
     }
   },
 };

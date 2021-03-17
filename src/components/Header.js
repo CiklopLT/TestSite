@@ -1,42 +1,68 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ApolloClient, InMemoryCache, gql, useQuery, useMutation, ApolloProvider } from '@apollo/client';
+import { useState } from "react";
+import { gql, useQuery } from '@apollo/client';
+import { FaBars } from 'react-icons/fa';
 import logo from '../assets/testpage_logo.svg';
 
 import './Header.css';
 
-const PAGES = gql`
-    query Query {
-        pages{
-            title,
-            subPages
-        }
-    }
-`;
-
-const Header = () => {
-  const { loading, data } = useQuery(PAGES);
+const Header = ({ menuLoading, menuData }) => {
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   return (
-    <header className="header">
-      <nav className="top-container">
-        <a href="/">
-          <div className="top-logo">
-            <img src={logo} alt="logo" />
-          </div>
-        </a>
+    <>
+      <header className="header">
+        <nav className="top-container">
+          <a href="/">
+            <div className="top-logo">
+              <img src={logo} alt="logo" />
+            </div>
+          </a>
           <ul className="items">
             {
-              !loading && data.pages.map((page) => {
+              !menuLoading && menuData.pages.map((page) => {
+                console.log(page);
                 return (
-                  <li key={page.title}>
-                    <a href="#" className="item-link">{page.title}</a>
-                  </li>
+                  <>
+                    <li key={page.title}>
+                      <a href="#" className="item-link">{page.title}</a>
+                    </li>
+                    {
+                      !!page.subPages.length &&
+                      <div className="drop">
+                        {
+                          page.subPages.map((subPage) => {
+                            return (<div><a href="#" key={subPage}>{subPage}</a></div>)
+                          })
+                        }
+                      </div>
+                    }
+                  </>
                 )
               })
             }
           </ul>
-      </nav>
-    </header>
+          <FaBars
+            className="drawer-icon"
+            size="2em"
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+          />
+        </nav>
+      </header>
+      {
+        showMobileMenu &&
+        <div className="mobile-nav-container">
+          {
+            !menuLoading && menuData.pages.map((page) => {
+              return (
+                <div className="mobile-nav-item" key={page.title}>
+                  <a href="#">{page.title}</a>
+                </div>
+              )
+            })
+          }
+        </div>
+      }
+    </>
   );
 };
 

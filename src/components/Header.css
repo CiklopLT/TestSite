@@ -1,8 +1,10 @@
 .header {
     height: 130px;
-    background-color: #4619AC;
     left: 0;
     right: 0;
+    background-color: #4619AC;
+    background-image: url('/public/effect.png');
+    background-repeat: no-repeat;
 }
 
 .top-container {
@@ -52,3 +54,78 @@
     text-transform: uppercase;
 }
 
+.item-link:hover {
+    color: #FAD32F;
+}
+
+.drop {
+    display: none;
+    position: absolute;
+    background-color: #4619AC;
+    min-width: 147px;
+    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
+    z-index: 1;
+    top: 105px;
+    margin-left: -30px;
+}
+
+.drop > div > a {
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.drop > div {
+    padding: 10px;
+}
+
+.drop > div > a:hover {
+    color: #FAD32F;
+}
+
+.items > li:hover + .drop {
+    display: block;
+}
+
+.drop:hover {
+    display: block;
+}
+
+.mobile-nav-container{
+    width: 100%;
+    background-color: #4619AC;
+    display: flex;
+    visibility: hidden;
+}
+
+.mobile-nav-container .mobile-nav-item {
+    margin: 0 auto;
+    color: white;
+    height: 40px;
+}
+
+.mobile-nav-container .mobile-nav-item > a {
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.drawer-icon {
+    color: white;
+    display: none;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    .items{
+        display: none;
+    }
+    .drawer-icon {
+        display: block;
+    }
+    .mobile-nav-container {
+        visibility: visible;
+    }
+}
