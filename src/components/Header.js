@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from "react";
-import { gql, useQuery } from '@apollo/client';
 import { FaBars } from 'react-icons/fa';
 import logo from '../assets/testpage_logo.svg';
 
@@ -20,23 +19,20 @@ const Header = ({ menuLoading, menuData }) => {
           <ul className="items">
             {
               !menuLoading && menuData.pages.map((page) => {
-                console.log(page);
                 return (
-                  <>
-                    <li key={page.title}>
+                  [
+                    <li key={`li-${page.title}`}>
                       <a href="#" className="item-link">{page.title}</a>
-                    </li>
-                    {
-                      !!page.subPages.length &&
-                      <div className="drop">
-                        {
-                          page.subPages.map((subPage) => {
-                            return (<div><a href="#" key={subPage}>{subPage}</a></div>)
-                          })
-                        }
-                      </div>
-                    }
-                  </>
+                    </li>,
+                    !!page.subPages.length &&
+                    <div className="drop" key={`drop-${page.title}`}>
+                      {
+                        page.subPages.map((subPage) => {
+                          return (<div key={subPage}><a href="#">{subPage}</a></div>)
+                        })
+                      }
+                    </div>
+                  ]
                 )
               })
             }

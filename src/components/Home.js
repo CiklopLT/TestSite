@@ -1,16 +1,35 @@
 import React from 'react';
+import { gql, useQuery } from "@apollo/client";
 
 import Layout from './Layout';
 import SubmitForm from './SubmitForm';
 import './Home.css';
 
+const CONTENT = gql`
+    query Query($title: String!) {
+        singlePage(title: $title){
+            content{
+                title,
+                body,
+                footer
+            }
+        }
+    }
+`;
+
 const Home = () => {
+  const { loading, data } = useQuery(CONTENT, { variables: { title: 'Projects' }});
   return (
     <Layout>
       <div className="content-container">
         <section className="content-selection">
-          <h1 className="content-title">Lorem ipsum dolor sit met, consecte</h1>
-          <p className="content-body">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</p>
+          {
+            !loading &&
+            [
+              <h1 key="h1" className="content-title">{data.singlePage.content.title}</h1>,
+              data.singlePage.content.body.split('|||').map((body, i) => <p key={i} className="content-body">{body}</p>)
+            ]
+          }
         </section>
         <aside className="submit-form-container">
           <h3 className="submit-title">Lorem ipsum dolor</h3>
@@ -22,9 +41,7 @@ const Home = () => {
         </aside>
       </div>
       <section className="bottom-container">
-        <div className="bottom-content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus.</div>
-        <div className="bottom-content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus.</div>
-        <div className="bottom-content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus.</div>
+        {!loading && data.singlePage.content.footer.split('|||').map((footer, i) => <div key={i} className="bottom-content">{footer}</div>)}
       </section>
     </Layout>
   );
