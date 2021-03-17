@@ -1,10 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ApolloClient, InMemoryCache, gql, useQuery, useMutation, ApolloProvider } from '@apollo/client';
 import logo from '../assets/testpage_logo.svg';
 
 import './Header.css';
 
+const PAGES = gql`
+    query Query {
+        pages{
+            title,
+            subPages
+        }
+    }
+`;
+
 const Header = () => {
+  const { loading, data } = useQuery(PAGES);
   return (
     <header className="header">
       <nav className="top-container">
@@ -14,12 +25,15 @@ const Header = () => {
           </div>
         </a>
           <ul className="items">
-            <li>
-              <a href="#" className="item-link">Home</a>
-            </li>
-            <li>
-              <a href="#" className="item-link">About Us</a>
-            </li>
+            {
+              !loading && data.pages.map((page) => {
+                return (
+                  <li key={page.title}>
+                    <a href="#" className="item-link">{page.title}</a>
+                  </li>
+                )
+              })
+            }
           </ul>
       </nav>
     </header>

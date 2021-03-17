@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import Layout from './Layout';
+import SubmitForm from './SubmitForm';
 import './Home.css';
 
 const Home = () => {
@@ -17,27 +17,7 @@ const Home = () => {
           <hr />
           <p className="submit-content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam.</p>
           <div className="submit-form">
-            <form>
-              <div className="input-group">
-                <label htmlFor="firstName" className="input-label">First name</label>
-                <div className="">
-                  <input type="text" readOnly="" className="submit-input" id="firstName" placeholder="Your first name here" />
-                </div>
-              </div>
-              <div className="input-group">
-                <label htmlFor="lastName" className="input-label">Last name</label>
-                <div className="">
-                  <input type="text" readOnly="" className="submit-input" id="lastName" placeholder="Your last name here" />
-                </div>
-              </div>
-              <div className="input-group">
-                <label htmlFor="messsage" className="input-label">Your message</label>
-                <div className="">
-                  <textarea rows={3} readOnly="" className="submit-input textarea-input" id="message" placeholder="Type your message here" />
-                </div>
-              </div>
-              <button type="submit" className="submit-btn">SUBMIT</button>
-            </form>
+            <SubmitForm />
           </div>
         </aside>
       </div>

@@ -5,7 +5,8 @@
 }
 
 .footer-container {
-
+    margin-left: 100px;
+    max-width: 1146px;
 }
 
 .footer ul{
