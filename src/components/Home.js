@@ -3,7 +3,7 @@ import { gql, useQuery } from "@apollo/client";
 
 import Layout from './Layout';
 import SubmitForm from './SubmitForm';
-import './Home.css';
+import '../styles/Home.css';
 
 const CONTENT = gql`
     query Query($title: String!) {

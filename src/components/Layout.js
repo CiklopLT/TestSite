@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header'
 import Footer from './Footer'
 
-import './Layout.css';
+import '../styles/Layout.css';
 import { gql, useQuery } from "@apollo/client";
 
 const PAGES = gql`

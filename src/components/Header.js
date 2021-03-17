@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FaBars } from 'react-icons/fa';
 import logo from '../assets/testpage_logo.svg';
 
-import './Header.css';
+import '../styles/Header.css';
 
 const Header = ({ menuLoading, menuData }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { ApolloClient, InMemoryCache, gql, useQuery, useMutation, ApolloProvider } from '@apollo/client';
 
-import './SubmitForm.css';
+import '../styles/SubmitForm.css';
 
 const SUBMIT_FORM = gql`
     mutation submitForm($firstName: String!, $lastName: String!, $message: String!) {
